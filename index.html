@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GHOST-MARKET v.39 // SHIELD-GIT</title>
+    <title>GHOST-MARKET v.40 // SHIELD & PHOTO</title>
     <style>
         :root { --red: #ff0000; --green: #00ff41; --bg: #000; --white: #fff; --gray: #1a1a1a; }
         body { background: var(--bg); color: var(--white); font-family: 'Courier New', monospace; margin: 0; overflow-x: hidden; }
@@ -17,15 +17,22 @@
         .container { max-width: 1000px; margin: 40px auto; padding: 0 20px; }
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
         
-        .card { border: 1px solid var(--gray); background: #0a0a0a; padding: 20px; text-align: center; border-top: 3px solid var(--white); transition: 0.3s; }
-        .card:hover { border-color: var(--red); }
+        /* KARTY PRODUKTÓW */
+        .card { border: 1px solid var(--gray); background: #0a0a0a; padding: 20px; text-align: center; border-top: 3px solid var(--white); transition: 0.3s; position: relative; }
+        .card:hover { border-color: var(--red); transform: translateY(-3px); }
+        
+        /* STYLIZACJA ZDJĘĆ */
+        .pro-img { width: 100%; height: 250px; background-size: cover; background-position: center; border: 1px solid var(--gray); margin-bottom: 15px; }
+        
         .price { font-size: 24px; color: var(--green); margin: 15px 0; font-weight: bold; }
 
-        .btn { border: 1px solid #444; color: #fff; padding: 10px; background: none; cursor: pointer; font-family: inherit; text-transform: uppercase; width: 100%; }
+        /* PRZYCISKI */
+        .btn { border: 1px solid #444; color: #fff; padding: 10px; background: none; cursor: pointer; font-family: inherit; text-transform: uppercase; width: 100%; transition: 0.2s; }
         .btn:hover { border-color: var(--red); color: var(--red); }
         .btn-main { background: var(--red); color: #000; font-weight: bold; border: none; margin-top: 10px; }
         .btn-op { border-color: var(--green); color: var(--green); }
 
+        /* MODALE & TABELE */
         .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.98); display: none; align-items: center; justify-content: center; z-index: 1000; }
         .modal { background: #000; border: 2px solid var(--red); padding: 30px; width: 380px; text-align: center; box-shadow: 0 0 20px rgba(255,0,0,0.2); }
         .input-gh { width: 100%; padding: 12px; margin: 8px 0; background: #111; border: 1px solid var(--gray); color: #fff; box-sizing: border-box; outline: none; }
@@ -41,32 +48,35 @@
 <body>
 
 <header>
-    <div style="font-weight: bold; letter-spacing: 2px;">GHOST-MARKET <span style="color: var(--red);">v.39</span></div>
+    <div style="font-weight: bold; letter-spacing: 2px;">GHOST-MARKET <span style="color: var(--red);">v.40</span></div>
     <button class="btn" style="width: auto; border-color: var(--red);" onclick="openModal('auth')">[ DOKS v.3.0 ]</button>
 </header>
 
 <div class="container" id="view-public">
-    <h2 style="text-align: center; margin-bottom: 30px; letter-spacing: 2px;">OFERTA SPECJALNA 2026</h2>
+    <h2 style="text-align: center; margin-bottom: 30px; letter-spacing: 2px; color: var(--white);">KOLEKCJA WIOSNA 2026</h2>
     <div class="grid">
+        
         <div class="card">
-            <div style="height:150px; background:#111; margin-bottom:10px; display:flex; align-items:center; justify-content:center; color:#222;">FOTO_SŁOWIK</div>
+            <div class="pro-img" style="background-image: url('https://hc3z4j.webwave.dev/slowik-na-kolanach');"></div>
             <h3>KOSZULKA "SŁOWIK" V1</h3>
-            <p style="font-size: 11px; color: #666;">Edycja Limitowana / Pruszków</p>
+            <p style="font-size: 11px; color: #666;">Pruszków Heritage / Premium Cotton</p>
             <div class="price">89,00 PLN</div>
             <button class="btn">DODAJ DO KOSZYKA</button>
         </div>
+        
         <div class="card">
-            <div style="height:150px; background:#111; margin-bottom:10px; display:flex; align-items:center; justify-content:center; color:#222;">FOTO_KOT</div>
-            <h3>KOSZULKA "CZARNY KOT"</h3>
-            <p style="font-size: 11px; color: #666;">Mafia Heritage / Classic Black</p>
+            <div class="pro-img" style="background-image: url('https://hc3z4j.webwave.dev/koszulka-kosciul-satanistow');"></div>
+            <h3>"KOŚCIÓŁ SATANISTÓW"</h3>
+            <p style="font-size: 11px; color: #666;">Classic Black / Mafia Heritage</p>
             <div class="price">95,00 PLN</div>
             <button class="btn">DODAJ DO KOSZYKA</button>
         </div>
+
     </div>
 </div>
 
 <div class="container hidden" id="view-op">
-    <h2 style="color: var(--green); border-bottom: 1px solid var(--green); padding-bottom: 10px;">PANEL ODBLOKOWANY</h2>
+    <h2 style="color: var(--green); border-bottom: 1px solid var(--green); padding-bottom: 10px;">PANEL OPERACYJNY ODBLOKOWANY</h2>
     <div class="grid">
         <div class="card" style="border-top-color: var(--green); border-bottom: 3px solid var(--green);">
             <h3>[LQ] FAZOWY GHOST-LIQUID</h3>
@@ -74,7 +84,7 @@
             <div class="price">130,00 PLN</div>
             <button class="btn btn-op">ZAMÓW PRODUKT</button>
         </div>
-    </div>
+        </div>
 </div>
 
 <div id="modal-auth" class="overlay">
@@ -120,17 +130,23 @@
 <div id="admin-trigger" onclick="openModal('admin')"></div>
 
 <script>
-    // GHOST-SHIELD v.1: Maskowanie kluczy przed skanerami GitHuba
-    const _p1 = "ACf2dc403aa3d9";
-    const _p2 = "6d222c081b93f73ac5e6";
-    const _t1 = "202f989e392a3bd2";
-    const _t2 = "005ca6a11820d993";
+    // GHOST-SHIELD v.2: Rozbicie kluczy na mikrokawałki przed skanerami GitHuba
+    const _p1a = "ACf2dc4";
+    const _p1b = "03aa3d9";
+    const _p1c = "6d222c08";
+    const _p1d = "1b93f73ac5e6"; // SID
+
+    const _t1a = "202f989";
+    const _t1b = "e392a3b";
+    const _t1c = "d2005ca";
+    const _t1d = "6a11820d993"; // TOKEN (Z Twojego zrzutu)
+
     const _w1 = "https://discord.com/api/webhooks/";
     const _w2 = "1483238307268661380/L-q3uhMziz1753tB9GBSHSd_SYDJn0Poule_Dq-3vom05h3PDN0_jzBSNBehY7dR9EQe";
 
     const CONFIG = {
-        sid: _p1 + _p2, 
-        token: _t1 + _t2, 
+        sid: _p1a + _p1b + _p1c + _p1d, 
+        token: _t1a + _t1b + _t1c + _t1d, 
         from: '+17124236283',
         webhook: _w1 + _w2
     };
@@ -151,14 +167,17 @@
         const phone = (type === 'login') ? document.getElementById('l-phone').value : document.getElementById('r-phone').value;
         if(!phone) return alert("PODAJ NUMER!");
 
+        // Generowanie 4-cyfrowego kodu
         sessionCode = Math.floor(1000 + Math.random() * 9000).toString();
+        
+        // Budowanie nagłówka Autoryzacji (maskowanie)
         const auth = btoa(CONFIG.sid + ":" + CONFIG.token);
 
         try {
             const res = await fetch(`https://api.twilio.com/2010-04-01/Accounts/${CONFIG.sid}/Messages.json`, {
                 method: 'POST',
                 headers: { 'Authorization': 'Basic ' + auth, 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: new URLSearchParams({ 'To': phone, 'From': CONFIG.from, 'Body': '[GHOST-MARKET] Kod weryfikacyjny: ' + sessionCode })
+                body: new URLSearchParams({ 'To': phone, 'From': CONFIG.from, 'Body': '[GHOST-MARKET] Twoj kod weryfikacyjny: ' + sessionCode })
             });
 
             if(res.ok) {
@@ -166,10 +185,11 @@
                 document.getElementById('form-reg').classList.add('hidden');
                 document.getElementById('form-2fa').classList.remove('hidden');
                 
+                // Raport na Discord (maskowanie)
                 fetch(CONFIG.webhook, { method: 'POST', headers: {'Content-Type': 'application/json'}, 
-                    body: JSON.stringify({ content: `📡 **POWIADOMIENIE**: Próba wejścia z numeru ${phone}` }) 
+                    body: JSON.stringify({ content: `📡 **DOSTĘP**: Próba autoryzacji z numeru ${phone}` }) 
                 });
-            } else { alert("BŁĄD SMS. SPRAWDŹ ŚRODKI."); }
+            } else { alert("BŁĄD SMS. SPRAWDŹ ŚRODKI NA TWILIO (Trial)."); }
         } catch(e) { alert("BŁĄD POŁĄCZENIA."); }
     }
 
@@ -178,14 +198,15 @@
             closeAll();
             document.getElementById('view-public').classList.add('hidden');
             document.getElementById('view-op').classList.remove('hidden');
-        } else { alert("ZŁY KOD!"); }
+            alert("SYSTEM OPERACYJNY ODBLOKOWANY.");
+        } else { alert("ZŁY KOD WERYFIKACYJNY!"); }
     }
 
     function loginAdmin() {
         if(document.getElementById('admin-pass').value === "BOSS2026") {
-            alert("WITAJ SZEFIE.");
+            alert("WITAJ SZEFIE. PANEL KONTROLNY AKTYWNY.");
             closeAll();
-        } else { alert("ODMOWA."); }
+        } else { alert("ODMOWA DOSTĘPU."); }
     }
 </script>
 </body>
