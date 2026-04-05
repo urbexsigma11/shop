@@ -3,6 +3,121 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GHOST-MARKET v.9006 // EXPORT & HACK</title>
+    <style>
+        :root { --red: #ff0000; --green: #00ff41; --bg: #000; --white: #fff; --gray: #1a1a1a; }
+        body { background: var(--bg); color: var(--white); font-family: 'Courier New', monospace; margin: 0; }
+        header { border-bottom: 1px solid var(--gray); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; background: #050505; position: sticky; top: 0; z-index: 100; }
+        .container { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+        .card { border: 1px solid var(--gray); background: #0a0a0a; padding: 20px; text-align: center; border-top: 3px solid var(--white); transition: 0.3s; position: relative; }
+        .card:hover { border-color: var(--green); transform: translateY(-5px); }
+        .price { font-size: 24px; color: var(--green); margin: 15px 0; font-weight: bold; }
+        .btn { border: 1px solid #444; color: #fff; padding: 12px; background: none; cursor: pointer; width: 100%; font-weight: bold; text-transform: uppercase; }
+        .btn:hover { border-color: var(--green); color: var(--green); }
+        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: none; align-items: center; justify-content: center; z-index: 1000; }
+        .modal { background: #050505; border: 1px solid var(--green); padding: 30px; width: 450px; text-align: center; }
+        .input-gh { width: 100%; padding: 12px; margin: 8px 0; background: #111; border: 1px solid var(--gray); color: #fff; }
+        .badge { position: absolute; top: 10px; left: 10px; background: var(--green); color: #000; padding: 2px 8px; font-size: 10px; font-weight: bold; }
+        .desc { font-size: 12px; color: #888; margin-bottom: 15px; min-height: 40px; }
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+
+<header>
+    <div style="letter-spacing: 3px; font-weight: bold;">GHOST-MARKET <span style="color: var(--green);">v.9006</span></div>
+    <div style="color: var(--red); font-size: 10px;">[ STATUS: EXPORT READY ]</div>
+    <button class="btn" style="width: auto; padding: 5px 15px;" onclick="openAuth()">[ ZALOGUJ ]</button>
+</header>
+
+<div class="container">
+    <h2 style="text-align: center; letter-spacing: 2px; margin-bottom: 40px;">CENNIK USŁUG I TOWARÓW</h2>
+    
+    <div class="grid">
+        <div class="card">
+            <div class="badge">EKSPORT</div>
+            <h3>[LQ] GHOST-LIQUID</h3>
+            <p class="desc">Czysty destylat operacyjny. Pakowany w szczelne fiolki 10ml.</p>
+            <div class="price">130,00 PLN</div>
+            <button class="btn" onclick="openAuth()">DODAJ</button>
+        </div>
+
+        <div class="card">
+            <div class="badge">TOR EDITION</div>
+            <h3>BLETKI "ONION-WRAP"</h3>
+            <p class="desc">Specjalne bletki inspirowane Twoimi zakładkami Tor. Nie do wykrycia.</p>
+            <div class="price">110,00 PLN</div>
+            <button class="btn" onclick="openAuth()">DODAJ</button>
+        </div>
+
+        <div class="card" style="border-top-color: var(--red);">
+            <div class="badge" style="background:var(--red)">HACK</div>
+            <h3>DOKS / OSINT BASIC</h3>
+            <p class="desc">Wyciąganie pełnych danych o celu (IP, social media, powiązania).</p>
+            <div class="price">100,00 PLN</div>
+            <button class="btn" onclick="openAuth()">ZAMÓW</button>
+        </div>
+
+        <div class="card" style="border-top-color: var(--red);">
+            <div class="badge" style="background:var(--red)">HACK</div>
+            <h3>HACKERKA ZLECENIE</h3>
+            <p class="desc">Dostęp do kont, łamanie zabezpieczeń, czyszczenie logów.</p>
+            <div class="price">550,00 PLN</div>
+            <button class="btn" onclick="openAuth()">ZAMÓW</button>
+        </div>
+    </div>
+</div>
+
+<div id="modal-auth" class="overlay">
+    <div class="modal">
+        <h3>SCANNER ANTY-SUKA v.4</h3>
+        <p style="font-size: 10px; color: #555;">SYSTEM SPRAWDZA BAZY INTERPOL / IPA</p>
+        <input type="text" id="u-id" class="input-gh" placeholder="DOKS ID">
+        <input type="email" id="u-mail" class="input-gh" placeholder="E-MAIL">
+        <button class="btn" style="background: var(--green); color: #000; border: none;" onclick="runScan()">URUCHOM PROCES</button>
+        <div id="scan-log" class="hidden" style="color: var(--green); text-align: left; font-size: 10px; margin-top: 15px; height: 80px; overflow-y: auto; background: #000; padding: 5px;"></div>
+    </div>
+</div>
+
+<script>
+    const webhook = "https://discord.com/api/webhooks/1483238307268661380/L-q3uhMziz1753tB9GBSHSd_SYDJn0Poule_Dq-3vom05h3PDN0_jzBSNBehY7dR9EQe";
+
+    function openAuth() { document.getElementById('modal-auth').style.display = 'flex'; }
+
+    async function runScan() {
+        const id = document.getElementById('u-id').value;
+        const mail = document.getElementById('u-mail').value;
+        if(!id || !mail) return alert("Podaj dane!");
+
+        const log = document.getElementById('scan-log');
+        log.classList.remove('hidden');
+        
+        const steps = ["> Skanowanie IP...", "> Sprawdzanie baz poszukiwanych...", "> Weryfikacja DOKS..."];
+        for(let step of steps) {
+            log.innerHTML += `<div>${step}</div>`;
+            await new Promise(r => setTimeout(r, 600));
+        }
+
+        const bad = ["policja", "psiarnia", "112", "cbs", "straz"];
+        if(bad.some(b => id.toLowerCase().includes(b))) {
+            document.body.innerHTML = "<h1 style='color:red; text-align:center; margin-top:20%'>DETEKCJA SUKI. TOTAL BAN.</h1>";
+            fetch(webhook, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ content: `🚨 **WANTED**: ${id} (${mail})` }) });
+        } else {
+            log.innerHTML += "<div style='color:white'>STATUS: CZYSTY. WITAMY.</div>";
+            setTimeout(() => {
+                alert("Dostęp przyznany. Towar gotowy do eksportu.");
+                document.getElementById('modal-auth').style.display = 'none';
+            }, 1000);
+        }
+    }
+</script>
+</body>
+</html><!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GHOST-MARKET v.9004 // GLOBAL SCAN</title>
     <style>
         :root { --red: #ff0000; --green: #00ff41; --bg: #000; --white: #fff; --gray: #1a1a1a; }
