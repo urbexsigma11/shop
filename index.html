@@ -3,85 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GHOST-MARKET v.9009 // CZ-EXPORT</title>
+    <title>GHOST-MARKET // TOTAL LOCKDOWN</title>
     <style>
         :root { --green: #00ff41; --red: #ff0000; --bg: #000; --gray: #1a1a1a; }
         body { background: var(--bg); color: #fff; font-family: 'Courier New', monospace; margin: 0; }
-        header { border-bottom: 1px solid var(--gray); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; background: #050505; sticky: top; }
+        header { border-bottom: 1px solid var(--gray); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; background: #050505; }
         .container { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
-        .card { border: 1px solid var(--gray); background: #0a0a0a; padding: 20px; text-align: center; border-top: 3px solid #fff; transition: 0.3s; }
-        .card:hover { border-color: var(--green); }
+        .card { border: 1px solid var(--gray); background: #0a0a0a; padding: 20px; text-align: center; border-top: 3px solid #fff; }
         .price { font-size: 24px; color: var(--green); margin: 15px 0; font-weight: bold; }
         .btn { border: 1px solid #444; color: #fff; padding: 12px; background: none; cursor: pointer; width: 100%; font-weight: bold; text-transform: uppercase; }
         .btn:hover { border-color: var(--green); color: var(--green); }
         .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: none; align-items: center; justify-content: center; z-index: 1000; }
-        .modal { background: #050505; border: 1px solid var(--green); padding: 30px; width: 400px; }
+        .modal { background: #050505; border: 1px solid var(--green); padding: 30px; width: 400px; text-align: center; }
         .input-gh { width: 100%; padding: 12px; margin: 8px 0; background: #111; border: 1px solid var(--gray); color: #fff; box-sizing: border-box; }
-        .hidden { display: none !important; }
-        .pro-img { width: 100%; height: 250px; object-fit: contain; background: #000; }
     </style>
 </head>
 <body>
 
 <header>
-    <div style="letter-spacing: 2px; font-weight: bold;">GHOST-MARKET <span style="color: var(--green);">v.9009</span></div>
+    <div style="letter-spacing: 2px; font-weight: bold;">GHOST-MARKET <span style="color: var(--green);">v.9010</span></div>
     <div style="display: flex; gap: 10px;">
-        <button class="btn" style="width: auto; padding: 5px 15px;" onclick="openM('auth')">ZALOGUJ / REJESTRACJA</button>
-        <button class="btn" style="width: auto; padding: 5px 15px; border-color: var(--red);" onclick="openM('admin')">ADMIN</button>
+        <button class="btn" style="width: auto; padding: 5px 15px;" onclick="openM()">LOGIN / REJESTRACJA</button>
     </div>
 </header>
 
-<div class="container" id="view-public">
-    <h2 style="text-align: center; margin-bottom: 30px;">OFFICIAL MERCH</h2>
+<div class="container" id="main-content">
+    <h2 style="text-align: center; margin-bottom: 30px;">OFFICIAL MERCH (PUBLIC)</h2>
     <div class="grid">
         <div class="card">
-            <img src="https://hc3z4j.webwave.dev/lib/hc3z4j/slowik_na_kolanach-m1ztp7it.jpg" class="pro-img" onerror="this.src='https://via.placeholder.com/300?text=KOSZULKA+1'">
+            <img src="https://hc3z4j.webwave.dev/lib/hc3z4j/slowik_na_kolanach-m1ztp7it.jpg" style="width:100%; height:250px; object-fit:contain;">
             <h3>KOSZULKA "SŁOWIK"</h3>
             <div class="price">89,00 PLN</div>
-            <button class="btn">DO KOSZYKA</button>
+            <button class="btn" onclick="alert('Zaloguj się, aby kupić')">KUP TERAZ</button>
         </div>
         <div class="card">
-            <img src="https://hc3z4j.webwave.dev/lib/hc3z4j/koszulka_kosciul_satanistow-m1ztp8u1.jpg" class="pro-img" onerror="this.src='https://via.placeholder.com/300?text=KOSZULKA+2'">
+            <img src="https://hc3z4j.webwave.dev/lib/hc3z4j/koszulka_kosciul_satanistow-m1ztp8u1.jpg" style="width:100%; height:250px; object-fit:contain;">
             <h3>"KOŚCIÓŁ SATANISTÓW"</h3>
             <div class="price">95,00 PLN</div>
-            <button class="btn">DO KOSZYKA</button>
-        </div>
-    </div>
-</div>
-
-<div class="container hidden" id="view-ops">
-    <h2 style="color: var(--green); text-align: center;">STREFA OPERACYJNA & IMPORT</h2>
-    <div class="grid">
-        <div class="card" style="border-top-color: var(--green)">
-            <h3>MARYSIA (ONION IMPORT)</h3>
-            <div class="price">od 130,00 PLN</div>
-            <button class="btn">ZAMÓW</button>
-        </div>
-        <div class="card" style="border-top-color: var(--green)">
-            <h3>PIXA.COM.PL (+10%)</h3>
-            <div class="price">CENA + 10%</div>
-            <button class="btn">RESELL</button>
-        </div>
-        <div class="card" style="border-top-color: var(--red)">
-            <h3>DOKS / OSINT BASIC</h3>
-            <div class="price">100,00 PLN</div>
-            <button class="btn">ZLEĆ (MIN. 100zł)</button>
-        </div>
-        <div class="card" style="border-top-color: var(--red)">
-            <h3>HACKING ADVANCED</h3>
-            <div class="price">550,00 PLN+</div>
-            <button class="btn">WYCENA</button>
+            <button class="btn" onclick="alert('Zaloguj się, aby kupić')">KUP TERAZ</button>
         </div>
     </div>
 </div>
 
 <div id="modal-auth" class="overlay">
     <div class="modal">
-        <h3>WERYFIKACJA DOKS</h3>
+        <h3>WERYFIKACJA TOŻSAMOŚCI</h3>
         <input type="text" id="u-id" class="input-gh" placeholder="DOKS ID / LOGIN">
         <input type="email" id="u-mail" class="input-gh" placeholder="E-MAIL">
-        <button class="btn" style="background: var(--green); color: #000; border: none; margin-top: 10px;" onclick="runAuth()">WEJDŹ</button>
+        <button class="btn" style="background: var(--green); color: #000; border: none; margin-top: 10px;" onclick="validate()">WEJDŹ DO PANELU</button>
         <button class="btn" style="border:none; margin-top:10px; font-size:10px;" onclick="closeM()">ANULUJ</button>
     </div>
 </div>
@@ -89,23 +59,50 @@
 <script>
     const wh = "https://discord.com/api/webhooks/1483238307268661380/L-q3uhMziz1753tB9GBSHSd_SYDJn0Poule_Dq-3vom05h3PDN0_jzBSNBehY7dR9EQe";
 
-    function openM(id) { document.getElementById('modal-' + id).style.display = 'flex'; }
-    function closeM() { document.querySelectorAll('.overlay').forEach(e => e.style.display = 'none'); }
+    function openM() { document.getElementById('modal-auth').style.display = 'flex'; }
+    function closeM() { document.getElementById('modal-auth').style.display = 'none'; }
 
-    function runAuth() {
+    function validate() {
         const id = document.getElementById('u-id').value;
         const mail = document.getElementById('u-mail').value;
-        const bad = ["policja", "112", "cbs", "kgp", "straz"];
+        const bad = ["policja", "112", "cbs", "kgp", "straz", "psu"];
 
         if(bad.some(b => id.toLowerCase().includes(b))) {
-            fetch(wh, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ content: `🚨 **DETEKCJA**: ${id} (${mail})` }) });
-            document.body.innerHTML = "<h1 style='color:red; text-align:center; margin-top:20%'>BAN: STATUS POSZUKIWANY.</h1>";
-        } else {
-            fetch(wh, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ content: `✅ **WEJŚCIE**: ${id}` }) });
-            document.getElementById('view-public').classList.add('hidden');
-            document.getElementById('view-ops').classList.remove('hidden');
-            closeM();
+            fetch(wh, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ content: `🚨 **WANTED ALERT**: ${id} (${mail})` }) });
+            document.body.innerHTML = "<h1 style='color:red; text-align:center; margin-top:20%'>BAN: IDENTYFIKACJA NEGATYWNA.</h1>";
+            return;
         }
+
+        // DYNAMICZNE GENEROWANIE TREŚCI - TEGO NIE MA W KODZIE PRZED LOGOWANIEM
+        const privateContent = `
+            <h2 style="color: var(--green); text-align: center; margin: 50px 0;">STREFA IMPORTU & HACKINGU</h2>
+            <div class="grid">
+                <div class="card" style="border-top: 3px solid var(--green)">
+                    <h3>MARYSIA (TOR IMPORT)</h3>
+                    <div class="price">OD 130,00 PLN</div>
+                    <button class="btn">ZAMÓW</button>
+                </div>
+                <div class="card" style="border-top: 3px solid var(--green)">
+                    <h3>PIXA.COM.PL (+10%)</h3>
+                    <div class="price">RESELL +10%</div>
+                    <button class="btn">ZAMÓW</button>
+                </div>
+                <div class="card" style="border-top: 3px solid var(--red)">
+                    <h3>DOKS / OSINT BASIC</h3>
+                    <div class="price">100,00 PLN</div>
+                    <button class="btn">ZLEĆ</button>
+                </div>
+                <div class="card" style="border-top: 3px solid var(--red)">
+                    <h3>ZLECENIE ADVANCED</h3>
+                    <div class="price">550,00 PLN+</div>
+                    <button class="btn">WYCENA</button>
+                </div>
+            </div>
+        `;
+
+        fetch(wh, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ content: `✅ **WEJŚCIE DO PANELU**: ${id}` }) });
+        document.getElementById('main-content').innerHTML = privateContent;
+        closeM();
     }
 </script>
 </body>
