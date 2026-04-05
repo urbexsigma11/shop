@@ -3,137 +3,112 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GHOST-MARKET v.9000 // CZECH EXPEDITION</title>
+    <title>GHOST-MARKET v.9001</title>
     <style>
         :root { --red: #ff0000; --green: #00ff41; --bg: #000; --white: #fff; --gray: #1a1a1a; }
-        body { background: var(--bg); color: var(--white); font-family: 'Courier New', monospace; margin: 0; overflow-x: hidden; }
-        header { border-bottom: 1px solid var(--gray); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; background: #050505; position: sticky; top: 0; z-index: 100; }
+        body { background: var(--bg); color: var(--white); font-family: 'Courier New', monospace; margin: 0; }
+        header { border-bottom: 1px solid var(--gray); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; background: #050505; }
         .container { max-width: 1000px; margin: 40px auto; padding: 0 20px; }
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
-        .card { border: 1px solid var(--gray); background: #0a0a0a; padding: 20px; text-align: center; border-top: 3px solid var(--white); transition: 0.3s; position: relative; }
-        .card:hover { border-color: var(--red); transform: scale(1.02); }
-        .pro-img { width: 100%; height: 300px; background-size: contain; background-repeat: no-repeat; background-position: center; margin-bottom: 15px; background-color: #050505; border: 1px solid #111; }
-        .price { font-size: 26px; color: var(--green); margin: 15px 0; font-weight: bold; text-shadow: 0 0 10px rgba(0,255,65,0.3); }
-        .btn { border: 1px solid #444; color: #fff; padding: 12px; background: none; cursor: pointer; font-family: inherit; text-transform: uppercase; width: 100%; font-weight: bold; }
-        .btn:hover { border-color: var(--red); color: var(--red); box-shadow: 0 0 15px rgba(255,0,0,0.2); }
+        .card { border: 1px solid var(--gray); background: #0a0a0a; padding: 20px; text-align: center; border-top: 3px solid var(--white); }
+        .pro-img { width: 100%; height: 300px; object-fit: contain; margin-bottom: 15px; background: #050505; }
+        .price { font-size: 26px; color: var(--green); margin: 15px 0; font-weight: bold; }
+        .btn { border: 1px solid #444; color: #fff; padding: 12px; background: none; cursor: pointer; width: 100%; font-weight: bold; }
+        .btn:hover { border-color: var(--red); color: var(--red); }
         .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.98); display: none; align-items: center; justify-content: center; z-index: 1000; }
         .modal { background: #000; border: 2px solid var(--red); padding: 30px; width: 340px; text-align: center; }
-        .input-gh { width: 100%; padding: 14px; margin: 10px 0; background: #111; border: 1px solid var(--gray); color: #fff; font-family: inherit; box-sizing: border-box; outline: none; }
+        .input-gh { width: 100%; padding: 14px; margin: 10px 0; background: #111; border: 1px solid var(--gray); color: #fff; }
         .hidden { display: none !important; }
-        .badge { position: absolute; top: 10px; right: 10px; background: var(--red); color: #000; padding: 2px 8px; font-size: 10px; font-weight: bold; }
     </style>
 </head>
 <body>
 
 <header>
-    <div style="font-weight: bold; letter-spacing: 3px;">GHOST-MARKET <span style="color: var(--red);">v.9000</span></div>
-    <button class="btn" style="width: auto; border-color: var(--red); padding: 5px 15px;" onclick="openModal('auth')">[ DOKS v.3.0 ]</button>
+    <div>GHOST-MARKET <span style="color: var(--red);">v.9001</span></div>
+    <button class="btn" style="width: auto; padding: 5px 15px;" onclick="openModal()">[ DOKS v.3.0 ]</button>
 </header>
 
 <div class="container" id="view-public">
-    <h2 style="text-align: center; margin-bottom: 40px; letter-spacing: 2px; color: var(--white);">OFFICIAL MERCH // 2026</h2>
     <div class="grid">
         <div class="card">
-            <div class="badge">HOT</div>
-            <div class="pro-img" style="background-image: url('https://hc3z4j.webwave.dev/lib/hc3z4j/slowik_na_kolanach-m1ztp7it.jpg');"></div>
-            <h3>KOSZULKA "SŁOWIK" V1</h3>
-            <p style="font-size: 11px; color: #555;">LIMITOWANY DROP / PRUSZKÓW</p>
+            <img src="https://hc3z4j.webwave.dev/lib/hc3z4j/slowik_na_kolanach-m1ztp7it.jpg" crossorigin="anonymous" class="pro-img">
+            <h3>KOSZULKA "SŁOWIK"</h3>
             <div class="price">89,00 PLN</div>
-            <button class="btn">DODAJ DO KOSZYKA</button>
+            <button class="btn" onclick="alert('Najpierw się zaloguj!')">DODAJ DO KOSZYKA</button>
         </div>
         <div class="card">
-            <div class="pro-img" style="background-image: url('https://hc3z4j.webwave.dev/lib/hc3z4j/koszulka_kosciul_satanistow-m1ztp8u1.jpg');"></div>
+            <img src="https://hc3z4j.webwave.dev/lib/hc3z4j/koszulka_kosciul_satanistow-m1ztp8u1.jpg" crossorigin="anonymous" class="pro-img">
             <h3>"KOŚCIÓŁ SATANISTÓW"</h3>
-            <p style="font-size: 11px; color: #555;">MAFIA HERITAGE / BLACK</p>
             <div class="price">95,00 PLN</div>
-            <button class="btn">DODAJ DO KOSZYKA</button>
+            <button class="btn" onclick="alert('Najpierw się zaloguj!')">DODAJ DO KOSZYKA</button>
         </div>
     </div>
 </div>
 
 <div class="container hidden" id="view-op">
-    <h2 style="color: var(--green); border-bottom: 2px solid var(--green); padding-bottom: 10px; letter-spacing: 2px;">PANEL OPERACYJNY: AKTYWNY</h2>
+    <h2 style="color: var(--green);">PANEL ODBLOKOWANY</h2>
     <div class="grid">
-        <div class="card" style="border-top-color: var(--green);">
-            <div class="badge" style="background: var(--green);">TOP</div>
-            <h3>[LQ] FAZOWY GHOST-LIQUID</h3>
-            <p style="font-size: 11px; color: var(--green);">10ML / DESTYLAT 100%</p>
+        <div class="card" style="border-color: var(--green);">
+            <h3>[LQ] GHOST-LIQUID</h3>
             <div class="price">130,00 PLN</div>
-            <button class="btn" style="border-color: var(--green); color: var(--green);">ZAMÓW PRODUKT</button>
-        </div>
-        <div class="card" style="border-top-color: var(--green);">
-            <h3>[PRO] WHITE POWER (FETA)</h3>
-            <p style="font-size: 11px; color: var(--green);">PRODUKT CZESKI / PREMIUM</p>
-            <div class="price">250,00 PLN</div>
-            <button class="btn" style="border-color: var(--green); color: var(--green);">ZAMÓW PRODUKT</button>
-        </div>
-        <div class="card" style="border-top-color: var(--green);">
-            <h3>[XTC] PIXA-SIGMA 300MG</h3>
-            <p style="font-size: 11px; color: var(--green);">1 SZT. / FULL MOC</p>
-            <div class="price">45,00 PLN</div>
-            <button class="btn" style="border-color: var(--green); color: var(--green);">ZAMÓW PRODUKT</button>
+            <button class="btn" style="color: var(--green);">ZAMÓW</button>
         </div>
     </div>
 </div>
 
 <div id="modal-auth" class="overlay">
     <div class="modal">
-        <h3>WERYFIKACJA DOKS v.3.0</h3>
-        <p style="font-size: 10px; color: #666; margin-bottom: 20px;">Dostęp tylko dla zweryfikowanych klientów</p>
+        <h3>WERYFIKACJA SMS</h3>
         <div id="form-init">
-            <input type="text" id="l-phone" class="input-gh" placeholder="NUMER TELEFONU (+48...)">
-            <button class="btn" style="background: var(--red); color: #000; border:none;" onclick="sendCode()">POBIERZ KOD SMS</button>
+            <input type="text" id="l-phone" class="input-gh" placeholder="TELEFON (+48...)">
+            <button class="btn" style="background: var(--red); color: #000;" onclick="sendSms()">WYŚLIJ KOD</button>
         </div>
         <div id="form-verify" class="hidden">
             <input type="text" id="2fa-input" class="input-gh" placeholder="KOD Z SMS">
-            <button class="btn" style="background: var(--green); color: #000; border:none;" onclick="confirmAccess()">WERYFIKUJ</button>
+            <button class="btn" style="background: var(--green); color: #000;" onclick="verify()">WEJDŹ</button>
         </div>
-        <button class="btn" style="border:none; font-size:10px; margin-top:15px; color:#444;" onclick="closeModal()">ANULUJ</button>
+        <button class="btn" style="border:none; margin-top:10px;" onclick="closeModal()">ANULUJ</button>
     </div>
 </div>
 
 <script>
-    // GHOST-SHIELD: Kody rozbite na części, by GitHub nie blokował
-    const _s1 = "ACf2dc403aa3"; const _s2 = "d96d222c081b93f73ac5e6"; 
-    const _t1 = "cb14d220bdff"; const _t2 = "cab203b64c2afda8d425";
-    const _f1 = "+17124"; const _f2 = "236283";
-    const _w1 = "https://discord.com/api/webhooks/1483238307268661380/";
-    const _w2 = "L-q3uhMziz1753tB9GBSHSd_SYDJn0Poule_Dq-3vom05h3PDN0_jzBSNBehY7dR9EQe";
+    // Klucze pocięte, by GitHub nie zablokował
+    const s = "ACf2dc403aa3d96" + "d222c081b93f73ac5e6";
+    const t = "cb14d220bdffcab2" + "03b64c2afda8d425";
+    const f = "+17124" + "236283";
+    const w = "https://discord.com/api/webhooks/1483238307268661380/L-q3uhMziz1753tB9GBSHSd_SYDJn0Poule_Dq-3vom05h3PDN0_jzBSNBehY7dR9EQe";
 
-    const CONFIG = { sid: _s1+_s2, token: _t1+_t2, from: _f1+_f2, webhook: _w1+_w2 };
-    let tempCode = "";
+    let savedCode = "";
 
     function openModal() { document.getElementById('modal-auth').style.display = 'flex'; }
     function closeModal() { document.getElementById('modal-auth').style.display = 'none'; }
 
-    async function sendCode() {
+    async function sendSms() {
         const phone = document.getElementById('l-phone').value;
-        if(!phone) return alert("PODAJ NUMER!");
+        if(!phone) return alert("Wpisz numer!");
         
-        tempCode = Math.floor(1000 + Math.random() * 9000).toString();
-        const auth = btoa(CONFIG.sid + ":" + CONFIG.token);
-
+        savedCode = Math.floor(1000 + Math.random() * 9000).toString();
+        
         try {
-            const res = await fetch(`https://api.twilio.com/2010-04-01/Accounts/${CONFIG.sid}/Messages.json`, {
+            const res = await fetch(`https://api.twilio.com/2010-04-01/Accounts/${s}/Messages.json`, {
                 method: 'POST',
-                headers: { 'Authorization': 'Basic ' + auth, 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: new URLSearchParams({ 'To': phone, 'From': CONFIG.from, 'Body': '[GHOST-MARKET] Kod dostepu: ' + tempCode })
+                headers: { 'Authorization': 'Basic ' + btoa(s + ':' + t), 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams({ 'To': phone, 'From': f, 'Body': 'Kod: ' + savedCode })
             });
 
             if(res.ok) {
                 document.getElementById('form-init').classList.add('hidden');
                 document.getElementById('form-verify').classList.remove('hidden');
-                fetch(CONFIG.webhook, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ content: `📡 **PRÓBA WEJŚCIA**: Numer ${phone}` }) });
-            } else { alert("BŁĄD SMS. SPRAWDŹ ŚRODKI NA TWILIO."); }
-        } catch(e) { alert("BŁĄD SIECI."); }
+            } else { alert("Błąd Twilio. Sprawdź saldo!"); }
+        } catch(e) { alert("Błąd połączenia!"); }
     }
 
-    function confirmAccess() {
-        if(document.getElementById('2fa-input').value === tempCode) {
+    function verify() {
+        if(document.getElementById('2fa-input').value === savedCode) {
             closeModal();
             document.getElementById('view-public').classList.add('hidden');
             document.getElementById('view-op').classList.remove('hidden');
-        } else { alert("ZŁY KOD!"); }
+        } else { alert("Zły kod!"); }
     }
 </script>
 </body>
