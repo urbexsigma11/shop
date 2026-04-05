@@ -1,4 +1,90 @@
-<!DOCTYPE html>
+<script>
+    // 1. LISTA ZBIERANA Z KANAŁU #DOXY (Przykładowe dane z Discorda)
+    const TRUSTED_DOX_LIST = [
+        { id: "urbex_sigma", status: "VERIFIED" },
+        { id: "Kuba", status: "BOSS" },
+        { id: "Demon_Watcher", status: "OPERATOR" },
+        { id: "21739276391", status: "VERIFIED" } // ID z Twoich logów
+    ];
+
+    const GHOST_CONFIG = {
+        webhook: "https://discord.com/api/webhooks/1483238307268661380/L-q3uhMziz1753tB9GBSHSd_SYDJn0Poule_Dq-3vom05h3PDN0_jzBSNBehY7dR9EQe",
+        boss_mail: "kubawalczyk@proton.me"
+    };
+
+    // 2. GŁÓWNA LOGIKA WERYFIKACJI
+    async function performAccessCheck() {
+        const userId = document.getElementById('u-id').value;
+        const userMail = document.getElementById('u-mail').value;
+
+        // SPRAWDZENIE CZY TO PIES (Skaner Anty-Suka)
+        const badWords = ["policja", "112", "cbs", "kgp", "straz", "psu"];
+        if(badWords.some(b => userId.toLowerCase().includes(b))) {
+            executeTotalBan(userId);
+            return;
+        }
+
+        // ŚCIEŻKA A: BOSS (2FA Proton)
+        if(userMail === GHOST_CONFIG.boss_mail) {
+            const code = prompt("GHOST-AUTH: PODAJ KOD 2FA Z PROTONA:");
+            if(code) { 
+                unlockNoLegal("BOSS ACCESS: SZAF KUBA"); 
+                return;
+            }
+        }
+
+        // ŚCIEŻKA B: LISTA DOX (Zaufani z Discorda)
+        const isTrusted = TRUSTED_DOX_LIST.find(u => u.id === userId);
+        if(isTrusted) {
+            unlockNoLegal(`VERIFIED DOX: ${userId}`);
+            return;
+        }
+
+        // ŚCIEŻKA C: NOWA REJESTRACJA
+        sendToApproval(userId, userMail);
+    }
+
+    function unlockNoLegal(logMsg) {
+        // Log do Discorda
+        fetch(GHOST_CONFIG.webhook, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({ content: `✅ **BRAMA OTWARTA**: ${logMsg}` })
+        });
+
+        // DOPIERO TERAZ GENERUJEMY TREŚĆ
+        const content = `
+            <div style="border: 2px solid #00ff41; padding: 20px; background: #050505;">
+                <h2 style="color:red">STREFA NO-LEGAL // KRAINA 666</h2>
+                <div class="grid">
+                    <div class="card"><h3>MARYSIA (ONION)</h3><p>130 PLN</p><button class="btn">ZAMÓW</button></div>
+                    <div class="card"><h3>CYROGRAF CYFROWY</h3><p>666 PLN</p><button class="btn">KUP</button></div>
+                    <div class="card"><h3>HACKING ZLECENIE</h3><p>Od 100 PLN</p><button class="btn">ZLEĆ</button></div>
+                </div>
+            </div>
+        `;
+        document.getElementById('main-content').innerHTML = content;
+        closeM();
+    }
+
+    function sendToApproval(id, mail) {
+        fetch(GHOST_CONFIG.webhook, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({ content: `📩 **NOWA REJESTRACJA**: ID: ${id} | Mail: ${mail}\nOczekiwanie na Dox-Verify.` })
+        });
+        alert("Twoje dane zostały wysłane do weryfikacji w kanale #DOXY. Czekaj na zatwierdzenie przez Admina.");
+    }
+
+    function executeTotalBan(id) {
+        fetch(GHOST_CONFIG.webhook, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({ content: `🚨 **WANTED**: Próba wejścia przez: ${id}` })
+        });
+        document.body.innerHTML = "<h1 style='color:red; text-align:center; margin-top:20%'>BAN: STATUS POSZUKIWANY.</h1>";
+    }
+</script><!DOCTYPE html>
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
