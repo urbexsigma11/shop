@@ -2,6 +2,78 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
+    <title>GHOST-CORE v.1.0 // AUTO-SHOP</title>
+    <style>
+        :root { --green: #00ff41; --bg: #000; --red: #ff0000; }
+        body { background: var(--bg); color: #fff; font-family: monospace; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; padding: 20px; }
+        .card { border: 1px solid #333; padding: 15px; background: #050505; border-top: 2px solid var(--green); }
+        .hidden { display: none !important; }
+        .btn { background: none; border: 1px solid var(--green); color: var(--green); padding: 10px; width: 100%; cursor: pointer; }
+        .btn:hover { background: var(--green); color: #000; }
+    </style>
+</head>
+<body>
+
+<header style="padding: 20px; border-bottom: 1px solid #222; display: flex; justify-content: space-between;">
+    <span>GHOST-CORE // AUTO-SEARCH: ACTIVE</span>
+    <button onclick="document.getElementById('auth').style.display='flex'" id="login-btn">LOGIN</button>
+</header>
+
+<div id="public-view" class="container">
+    <h2 style="text-align:center">PUBLIC MERCH</h2>
+    <div class="grid">
+        <div class="card"><h3>KOSZULKA SŁOWIK</h3><p>89 PLN</p></div>
+    </div>
+</div>
+
+<div id="private-view" class="container hidden">
+    <h2 style="text-align:center; color: var(--green)">STREFA OPERACYJNA (AUTO-LOADED)</h2>
+    <div id="dynamic-items" class="grid"></div>
+</div>
+
+<div id="auth" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); display:none; align-items:center; justify-content:center;">
+    <div style="background:#050505; border:1px solid var(--green); padding:30px;">
+        <h3>DOKS ID / ACCESS</h3>
+        <input type="text" id="pass" style="width:100%; margin-bottom:10px; background:#111; color:#fff; border:1px solid #333; padding:10px;">
+        <button class="btn" onclick="check()">WERYFIKUJ</button>
+    </div>
+</div>
+
+<script>
+    async function check() {
+        const p = document.getElementById('pass').value;
+        if(p === "admin123") { // Tutaj Twoja logika weryfikacji
+            const response = await fetch('data.json');
+            const items = await response.json();
+            
+            let html = '';
+            items.forEach(item => {
+                html += `
+                    <div class="card">
+                        <span style="font-size:10px; color:#555">${item.category}</span>
+                        <h3>${item.name}</h3>
+                        <p>${item.desc}</p>
+                        <div style="color:var(--green); font-weight:bold; font-size:20px;">${item.price} PLN</div>
+                        <button class="btn">ZAMÓW</button>
+                    </div>
+                `;
+            });
+            
+            document.getElementById('dynamic-items').innerHTML = html;
+            document.getElementById('public-view').classList.add('hidden');
+            document.getElementById('private-view').classList.remove('hidden');
+            document.getElementById('auth').style.display = 'none';
+        } else {
+            alert("BAN: NIEAUTORYZOWANY DOSTĘP");
+        }
+    }
+</script>
+</body>
+</html><!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GHOST-MARKET // TOTAL LOCKDOWN</title>
     <style>
